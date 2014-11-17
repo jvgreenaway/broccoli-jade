@@ -2,6 +2,18 @@
 var Filter = require('broccoli-filter');
 var jade = require('jade');
 
+// Custom escape filter
+jade.filters.escape = function( block ) {
+  return block
+    .replace( /&/g, '&amp;'  )
+    .replace( /</g, '&lt;'   )
+    .replace( />/g, '&gt;'   )
+    .replace( /"/g, '&quot;' )
+    .replace( /#/g, '&#35;'  )
+    .replace( /\\/g, '\\\\'  )
+};
+
+
 function JadeFilter(inputTree, options) {
 	if (!(this instanceof JadeFilter)) {
 		return new JadeFilter(inputTree, options);
